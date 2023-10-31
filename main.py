@@ -18,6 +18,10 @@ app.add_middleware(
 class RequesTranslate(BaseModel):
     text_buffer: str
 
+@agg.get('/')
+def index():
+    return {'response':'Hola Mundo'}
+
 @app.get('/translate/{from_payload}/{to_payload}/{text_buffer}')
 async def translate_text_buffer(from_payload: str, to_payload: str, text_buffer:str):
     try:
