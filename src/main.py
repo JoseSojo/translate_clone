@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from .translate import Trans
+import goslate
+
+def Trans(text, last):
+    gs = goslate.Goslate()
+    translate = gs.translate(text, last)
+
+    return translate
 
 app = FastAPI()
 
@@ -18,7 +24,7 @@ app.add_middleware(
 class RequesTranslate(BaseModel):
     text_buffer: str
 
-@agg.get('/')
+@app.get('/')
 def index():
     return {'response':'Hola Mundo'}
 
